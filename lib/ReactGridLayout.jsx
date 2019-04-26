@@ -13,7 +13,7 @@ import {
   moveElement,
   synchronizeLayoutWithChildren,
   validateLayout,
-  getFirstCollision,
+  getAllCollisions,
   noop,
   createDragApiRef
 } from "./utils";
@@ -289,7 +289,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
         }
       },
 
-      dragOut: ({ event }) => {
+      dragOut: () => {
         if (dragInfo) {
           const { i } = dragInfo;
           this.setState((state, props) => ({
@@ -329,7 +329,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     this.onLayoutMaybeChanged(this.state.layout, this.props.layout);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     let newLayoutBase;
     // Legacy support for compactType
     // Allow parent to set layout directly.
@@ -502,7 +502,6 @@ export default class ReactGridLayout extends React.Component<Props, State> {
   onResizeStart(i: string, w: number, h: number, { e, node }: GridResizeEvent) {
     const { layout } = this.state;
     var l = getLayoutItem(layout, i);
-    const placeholder = this.state.activeDrag;
     if (!l) return;
 
     this.setState({
