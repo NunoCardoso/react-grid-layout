@@ -122,6 +122,10 @@ var ReactGridLayout = (function(_React$Component) {
         var i = _ref.i,
           w = _ref.w,
           h = _ref.h,
+          minH = _ref.minH,
+          maxH = _ref.maxH,
+          minW = _ref.minW,
+          maxW = _ref.maxW,
           node = _ref.node,
           event = _ref.event,
           position = _ref.position;
@@ -146,7 +150,17 @@ var ReactGridLayout = (function(_React$Component) {
           y = _calcXY.y;
 
         if (!_this2.state.activeDrag) {
-          var l = { i: i, w: w, h: h, x: x, y: y };
+          var l = {
+            i: i,
+            w: w,
+            h: h,
+            x: x,
+            y: y,
+            minH: minH,
+            maxH: maxH,
+            minW: minW,
+            maxW: maxW
+          };
           _this2.setState({
             oldDragItem: l,
             oldLayout: layout,
